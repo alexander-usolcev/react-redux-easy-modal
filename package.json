@@ -1,6 +1,6 @@
 {
   "name": "react-redux-easy-modal",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "author": "Alexander Usolcev <alexander.usolcev@gmail.com>",
   "repository": {
     "type": "git",
@@ -25,7 +25,6 @@
   },
   "description": "Basic react-redux modal implementation (reducer, store, components and actions)",
   "main": "./build/index.js",
-  "module": "./source/index.js",
   "directories": {
     "test": "test"
   },
