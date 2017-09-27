@@ -163,3 +163,10 @@ import { MobileModals } from 'react-redux-easy-modal';
         Delete?
 </MobileModals.Confirm>
 ```
+
+Default values for \<MobileModals.Confirm\> is:
+``` js
+title = 'Confirm'; 
+cancelText = 'Cancel'; 
+okText = 'OK';
+```
