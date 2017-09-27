@@ -57,7 +57,7 @@ ReactDOM.render(
 );
 ```
 
-Inside <Modal> you can use any html.
+Inside \<Modal\> you can use any html.
 
 When you clicked on 'Show modal' you will see something like this:
 
@@ -126,17 +126,29 @@ Return:
 
 Example:
 ``` js
-import { ModalContainer } from 'react-redux-easy-modal';
+import { Modal } from 'react-redux-easy-modal';
 
-<ModalContainer>
-    Some clear html content without any styles.
-</ModalContainer>
+<Modal>
+    Html with classes and styles.
+</Modal>
 ```
 
 ### MobileModals
 react-redux-easy-modal also have some modals for mobile.
-Return:
+
+Depending on the device, different modals will be displayed. Supported Android and iOS.
+
+You don't need to set any config. React-redux-easy-modal will get the user agent and load css for current device.
+
+#### Confirm
+
+Android
+
 ![Example](data/MobileModalsConfirm.jpg?raw=true)
+
+iOS
+
+![Example](data/MobileModalsConfirmIOS.jpg?raw=true)
 
 Example:
 ``` js
