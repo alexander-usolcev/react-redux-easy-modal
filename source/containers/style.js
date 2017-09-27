@@ -337,17 +337,22 @@ const styles = `
     }
 `;
 
-function createStyleTag(styles) {
+function createStyleTag(id, styles) {
     let style = document.createElement('style');
+    style.id = id;
     style.type = 'text/css';
     style.innerHTML = styles;
     document.body.appendChild(style);
 }
 
 export function createStyleForMobile() {
-    createStyleTag(stylesForMobile);
+    if (!document.getElementById('react-redux-easy-modal-css-mobile')) {
+        createStyleTag('react-redux-easy-modal-css-mobile', stylesForMobile);
+    }
 }
 
 export function createStyle() {
-    createStyleTag(styles);
+    if (!document.getElementById('react-redux-easy-modal-css')) {
+        createStyleTag('react-redux-easy-modal-css', styles);
+    }
 }

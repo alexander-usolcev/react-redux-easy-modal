@@ -1,6 +1,6 @@
 {
   "name": "react-redux-easy-modal",
-  "version": "1.0.2",
+  "version": "1.1.0",
   "author": "Alexander Usolcev <alexander.usolcev@gmail.com>",
   "repository": {
     "type": "git",
@@ -40,7 +40,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "cross-env NODE_ENV=development webpack-dev-server --inline --hot --open --history-api-fallback",
     "prod": "npm --no-git-tag-version version patch && npm run build",
-    "build": "cross-env NODE_ENV=production webpack"
+    "build": "babel source --out-dir build",
+    "build:webpack": "cross-env NODE_ENV=production webpack"
   },
   "homepage": "https://github.com/alexander-usolcev/react-redux-easy-modal#readme",
   "bugs": {

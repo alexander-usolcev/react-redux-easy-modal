@@ -1,21 +1,21 @@
 const path = require('path');
 const webpack = require('webpack');
 
-var reactExternal = {
+const reactExternal = {
     root: 'React',
     commonjs2: 'react',
     commonjs: 'react',
     amd: 'react'
 };
 
-var reduxExternal = {
+const reduxExternal = {
     root: 'Redux',
     commonjs2: 'redux',
     commonjs: 'redux',
     amd: 'redux'
 };
 
-var reactReduxExternal = {
+const reactReduxExternal = {
     root: 'ReactRedux',
     commonjs2: 'react-redux',
     commonjs: 'react-redux',
@@ -26,9 +26,7 @@ module.exports = {
     context: path.join(__dirname + '/source'),
 
     entry: {
-        'index': [
-            './index.js'
-        ]
+        'index': './index.js'
     },
 
     output: {
