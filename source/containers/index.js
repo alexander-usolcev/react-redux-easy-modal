@@ -39,8 +39,8 @@ class ModalRoot extends Base {
         }
 
         return (
-            <div className="modal">
-                <div className="modal__content">
+            <div className="react-redux-easy-modal">
+                <div className="react-redux-easy-modal-content">
                     {children}
                 </div>
             </div>

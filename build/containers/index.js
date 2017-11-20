@@ -91,10 +91,10 @@ var ModalRoot = function (_Base2) {
 
             return React.createElement(
                 'div',
-                { className: 'modal' },
+                { className: 'react-redux-easy-modal' },
                 React.createElement(
                     'div',
-                    { className: 'modal__content' },
+                    { className: 'react-redux-easy-modal-content' },
                     children
                 )
             );

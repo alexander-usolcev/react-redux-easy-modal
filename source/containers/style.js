@@ -280,7 +280,7 @@ const stylesForMobile = `
 `;
 
 const styles = `
-    .modal {
+    .react-redux-easy-modal {
       white-space: nowrap;
       word-spacing: 0;
       padding: 0;
@@ -310,7 +310,7 @@ const styles = `
       display: table;
       z-index: 2147483647;
     }
-    .modal__content {
+    .react-redux-easy-modal-content {
       white-space: nowrap;
       overflow: hidden;
       word-spacing: 0;
@@ -331,9 +331,8 @@ const styles = `
       font-size: 17px;
       display: table-cell;
       vertical-align: middle;
-      text-align: center;
-      color: #fff;
       white-space: normal;
+      text-align: center;
     }
 `;
 
