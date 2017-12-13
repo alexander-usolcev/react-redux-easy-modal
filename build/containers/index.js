@@ -26,6 +26,15 @@ var Base = function (_PureComponent) {
         value: function componentDidMount() {
             setDispatch(this.props.dispatch);
         }
+    }, {
+        key: 'shouldComponentUpdate',
+        value: function shouldComponentUpdate(nextProps) {
+            if (nextProps.all) {
+                return true;
+            }
+
+            return !!(!nextProps.show && nextProps.showById || nextProps.show);
+        }
     }]);
 
     return Base;
@@ -44,11 +53,12 @@ var ModalContainerRoot = function (_Base) {
         key: 'render',
         value: function render() {
             var _props = this.props,
-                modal = _props.modal,
+                show = _props.show,
+                showById = _props.showById,
                 children = _props.children;
 
 
-            if (!modal.showed) {
+            if (!show) {
                 return null;
             }
 
@@ -81,11 +91,11 @@ var ModalRoot = function (_Base2) {
         key: 'render',
         value: function render() {
             var _props2 = this.props,
-                modal = _props2.modal,
+                show = _props2.show,
                 children = _props2.children;
 
 
-            if (!modal.showed) {
+            if (!show) {
                 return null;
             }
 
@@ -104,9 +114,21 @@ var ModalRoot = function (_Base2) {
     return ModalRoot;
 }(Base);
 
-var mapStateToProps = function mapStateToProps(state) {
+var mapStateToProps = function mapStateToProps(_ref, ownProps) {
+    var modal = _ref.modal;
+
+    if (modal.id === '*') {
+        return {
+            show: modal.show,
+            all: true
+        };
+    }
+
+    var showById = ownProps.id && ownProps.id === modal.id;
+
     return {
-        modal: state.modal
+        show: modal.show && showById,
+        showById: showById
     };
 };
 

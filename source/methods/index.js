@@ -2,12 +2,16 @@ import { getDispatch } from '../store/dispatch';
 import { showModal as show, hideModal as hide } from '../actions';
 
 
-function showModal() {
-    return getDispatch()(show());
+function getId(e) {
+    return typeof e === 'string' ? e : '*';
 }
 
-function hideModal() {
-    return getDispatch()(hide());
+function showModal(e) {
+    return getDispatch()(show(getId(e)));
+}
+
+function hideModal(e) {
+    return getDispatch()(hide(getId(e)));
 }
 
 export { showModal, hideModal };

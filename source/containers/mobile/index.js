@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { hideModal } from '../../actions';
+import { hideModal } from '../../methods';
 import { Base } from '../index';
 import { createStyleForMobile } from '../style';
 
@@ -20,9 +20,9 @@ class ConfirmRoot extends Base {
     }
 
     ok() {
-        const { callback, dispatch } = this.props;
+        const { callback } = this.props;
 
-        dispatch(hideModal());
+        hideModal(this.props.id);
 
         if (callback) {
             callback();
@@ -30,9 +30,9 @@ class ConfirmRoot extends Base {
     }
 
     cancel() {
-        const { dispatch, cancelCallback } = this.props;
+        const { cancelCallback } = this.props;
 
-        dispatch(hideModal());
+        hideModal(this.props.id);
 
         if (cancelCallback) {
             cancelCallback();
@@ -40,9 +40,9 @@ class ConfirmRoot extends Base {
     }
 
     render() {
-        const { modal, children, title = 'Confirm', cancelText = 'Cancel', okText = 'OK' } = this.props;
+        const { show, children, title = 'Confirm', cancelText = 'Cancel', okText = 'OK' } = this.props;
 
-        if (!modal.showed) {
+        if (!show) {
             return null;
         }
 
@@ -70,9 +70,19 @@ class ConfirmRoot extends Base {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({modal}, ownProps) => {
+    if (modal.id === '*') {
+        return {
+            show: modal.show,
+            all: true
+        }
+    }
+
+    let showById = ownProps.id && ownProps.id === modal.id;
+
     return {
-        modal: state.modal
+        show: modal.show && showById,
+        showById
     };
 };
 

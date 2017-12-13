@@ -8,13 +8,21 @@ class Base extends PureComponent {
     componentDidMount() {
         setDispatch(this.props.dispatch);
     }
+
+    shouldComponentUpdate(nextProps) {
+        if (nextProps.all) {
+            return true;
+        }
+
+        return !!((!nextProps.show && nextProps.showById) || nextProps.show);
+    }
 }
 
 class ModalContainerRoot extends Base {
     render() {
-        const { modal, children } = this.props;
+        const { show, showById, children } = this.props;
 
-        if (!modal.showed) {
+        if (!show) {
             return null;
         }
 
@@ -32,9 +40,9 @@ class ModalRoot extends Base {
     }
 
     render() {
-        const { modal, children } = this.props;
+        const { show, children } = this.props;
 
-        if (!modal.showed) {
+        if (!show) {
             return null;
         }
 
@@ -48,9 +56,19 @@ class ModalRoot extends Base {
     }
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = ({modal}, ownProps) => {
+    if (modal.id === '*') {
+        return {
+            show: modal.show,
+            all: true
+        }
+    }
+
+    let showById = ownProps.id && ownProps.id === modal.id;
+
     return {
-        modal: state.modal
+        show: modal.show && showById,
+        showById
     };
 };
 

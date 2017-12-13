@@ -42,8 +42,10 @@ const App = () => (
         My application.
 
         <Modal>
-            Some content.
-            <div onClick={hideModal}>Hide modal</div>
+            <div style={{color: '#fff'}}>
+                Some content.
+                <div onClick={hideModal}>Hide modal</div>
+            </div>
         </Modal>
     </div>
 );
@@ -57,7 +59,7 @@ ReactDOM.render(
 );
 ```
 
-Inside \<Modal\> you can use any html.
+Inside ```<Modal>``` you can use any html.
 
 When you clicked on 'Show modal' you will see something like this:
 
@@ -69,7 +71,8 @@ Return modal reducer for redux combineReducers.
 
 ### showModal
 Function to show modal.
-Will show all modals which can be displayed. It's mean all <Modal>, <ModalContainer> or <MobileModals.*> which attached to current visible component. 
+
+Will show all modals which can be displayed. It means all ```<Modal>, <ModalContainer> or <MobileModals.*>``` which attached to current visible component. 
 ``` js
 import { Modal, showModal } from 'react-redux-easy-modal';
 
@@ -81,9 +84,29 @@ import { Modal, showModal } from 'react-redux-easy-modal';
 </div>
 ```
 
+But you can show only specific modal by id:
+``` js
+<button onClick={() => showModal('main-modal')}>showModalById</button>
+
+<ModalContainer id="main-modal">
+    <div>
+        Some content.
+        <div onClick={() => hideModal('main-modal')}>Hide modal</div>
+    </div>
+</ModalContainer>
+
+<ModalContainer>
+    Clear html.
+    <div onClick={hideModal}>Hide all modals</div>
+</ModalContainer>
+```
+
+After button's click will show only ```<ModalContainer id="main-modal">```, ```<ModalContainer>Clear html.``` will not be displayed.
+
 ### hideModal
 Function to hide modal.
-Will hide all modals which can be displayed. It's mean all <Modal>, <ModalContainer> or <MobileModals.*> which attached to current visible component. 
+
+Will hide all modals which can be displayed. It means all ```<Modal>, <ModalContainer> or <MobileModals.*>``` which attached to current visible component. 
 ``` js
 import { Modal, showModal, hideModal } from 'react-redux-easy-modal';
 
@@ -96,6 +119,21 @@ import { Modal, showModal, hideModal } from 'react-redux-easy-modal';
     <div onClick={showModal}></div>
 </div>
 ```
+
+But you can hide only specific modal by id:
+``` js
+<button onClick={() => showModal('main-modal')}>showModalById</button>
+
+<ModalContainer id="main-modal">
+    <div>
+        Some content.
+        <div onClick={() => hideModal('main-modal')}>Hide modal</div>
+    </div>
+</ModalContainer>
+```
+
+After button's click will hide only ```<ModalContainer id="main-modal">```.
+
 
 ### ModalContainer
 Return a react component with clear html (without any styles and classes).
@@ -117,8 +155,8 @@ import { ModalContainer } from 'react-redux-easy-modal';
 Return a react component with classes and styles.
 Return:
 ``` js
-<div className="modal">
-    <div className="modal__content">
+<div className="react-redux-easy-modal">
+    <div className="react-redux-easy-modal-content">
         {children}
     </div>
 </div>.
@@ -164,9 +202,13 @@ import { MobileModals } from 'react-redux-easy-modal';
 </MobileModals.Confirm>
 ```
 
-Default values for \<MobileModals.Confirm\> is:
+Default values for ```<MobileModals.Confirm>``` is:
 ``` js
 title = 'Confirm'; 
 cancelText = 'Cancel'; 
 okText = 'OK';
 ```
+
+## Try it
+Clone project and then call:
+```npm i && npm run dev```

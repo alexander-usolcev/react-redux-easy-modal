@@ -1,16 +1,18 @@
 import { SHOW_MODAL, HIDE_MODAL } from '../const/actions';
 
-function showModal() {
+function showModal(id) {
     return {
         type: SHOW_MODAL,
-        showed: true
+        show: true,
+        id: id
     };
 }
 
-function hideModal() {
+function hideModal(id) {
     return {
         type: HIDE_MODAL,
-        showed: false
+        show: false,
+        id: id
     };
 }
 

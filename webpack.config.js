@@ -1,43 +1,24 @@
 const path = require('path');
 const webpack = require('webpack');
 
-const reactExternal = {
-    root: 'React',
-    commonjs2: 'react',
-    commonjs: 'react',
-    amd: 'react'
-};
-
-const reduxExternal = {
-    root: 'Redux',
-    commonjs2: 'redux',
-    commonjs: 'redux',
-    amd: 'redux'
-};
-
-const reactReduxExternal = {
-    root: 'ReactRedux',
-    commonjs2: 'react-redux',
-    commonjs: 'react-redux',
-    amd: 'react-redux'
-};
-
 module.exports = {
-    context: path.join(__dirname + '/source'),
+    // context: path.join(__dirname + '/source'),
 
     entry: {
-        'index': './index.js'
+        'app': [
+            'react-hot-loader/patch', // RHL patch
+            path.join(__dirname + '/source/index.js')
+        ],
+        'test-browser': path.join(__dirname + '/test/test-browser.js')
     },
 
     output: {
         path: path.join(__dirname + '/build'),
         filename: '[name].js',
-        // libraryTarget: 'commonjs2',
-        publicPath: '/',
-
-        library: 'react-redux-easy-modal',
-        libraryTarget: 'commonjs2'
+        publicPath: '/'
     },
+
+    devtool: 'eval-source-map',
 
     resolve: {
         extensions: ['.js'],
@@ -59,9 +40,20 @@ module.exports = {
         ]
     },
 
-    externals: {
-        react: reactExternal,
-        redux: reduxExternal,
-        'react-redux': reactReduxExternal
-    },
+    plugins: [
+        new webpack.NoEmitOnErrorsPlugin(),
+
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'vendor',
+            filename: 'vendor.min.js',
+            minChunks(module) {
+                let context = module.context;
+                return context && context.indexOf('node_modules') >= 0;
+            },
+        }),
+
+        new webpack.optimize.CommonsChunkPlugin({
+            name: 'manifest'
+        }),
+    ]
 };

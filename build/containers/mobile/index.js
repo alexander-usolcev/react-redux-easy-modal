@@ -9,7 +9,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 import React from 'react';
 import { connect } from 'react-redux';
 
-import { hideModal } from '../../actions';
+import { hideModal } from '../../methods';
 import { Base } from '../index';
 import { createStyleForMobile } from '../style';
 
@@ -36,12 +36,10 @@ var ConfirmRoot = function (_Base) {
     }, {
         key: 'ok',
         value: function ok() {
-            var _props = this.props,
-                callback = _props.callback,
-                dispatch = _props.dispatch;
+            var callback = this.props.callback;
 
 
-            dispatch(hideModal());
+            hideModal(this.props.id);
 
             if (callback) {
                 callback();
@@ -50,12 +48,10 @@ var ConfirmRoot = function (_Base) {
     }, {
         key: 'cancel',
         value: function cancel() {
-            var _props2 = this.props,
-                dispatch = _props2.dispatch,
-                cancelCallback = _props2.cancelCallback;
+            var cancelCallback = this.props.cancelCallback;
 
 
-            dispatch(hideModal());
+            hideModal(this.props.id);
 
             if (cancelCallback) {
                 cancelCallback();
@@ -64,18 +60,18 @@ var ConfirmRoot = function (_Base) {
     }, {
         key: 'render',
         value: function render() {
-            var _props3 = this.props,
-                modal = _props3.modal,
-                children = _props3.children,
-                _props3$title = _props3.title,
-                title = _props3$title === undefined ? 'Confirm' : _props3$title,
-                _props3$cancelText = _props3.cancelText,
-                cancelText = _props3$cancelText === undefined ? 'Cancel' : _props3$cancelText,
-                _props3$okText = _props3.okText,
-                okText = _props3$okText === undefined ? 'OK' : _props3$okText;
+            var _props = this.props,
+                show = _props.show,
+                children = _props.children,
+                _props$title = _props.title,
+                title = _props$title === undefined ? 'Confirm' : _props$title,
+                _props$cancelText = _props.cancelText,
+                cancelText = _props$cancelText === undefined ? 'Cancel' : _props$cancelText,
+                _props$okText = _props.okText,
+                okText = _props$okText === undefined ? 'OK' : _props$okText;
 
 
-            if (!modal.showed) {
+            if (!show) {
                 return null;
             }
 
@@ -123,9 +119,21 @@ var ConfirmRoot = function (_Base) {
     return ConfirmRoot;
 }(Base);
 
-var mapStateToProps = function mapStateToProps(state) {
+var mapStateToProps = function mapStateToProps(_ref, ownProps) {
+    var modal = _ref.modal;
+
+    if (modal.id === '*') {
+        return {
+            show: modal.show,
+            all: true
+        };
+    }
+
+    var showById = ownProps.id && ownProps.id === modal.id;
+
     return {
-        modal: state.modal
+        show: modal.show && showById,
+        showById: showById
     };
 };
 
